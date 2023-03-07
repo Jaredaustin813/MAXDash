@@ -8,6 +8,7 @@ import plotly.express as px
 import keplergl
 
 app = dash.Dash()
+server = app.server
 
 df1 = pd.read_csv('max_muni_total_ONLY.csv')
 df2 = pd.read_csv('highest_contributing_factors.csv')
