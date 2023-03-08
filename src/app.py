@@ -7,7 +7,12 @@ import pandas as pd
 import plotly.express as px
 import keplergl
 
-app = dash.Dash()
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    meta_tags=[{'name': 'viewport', 
+                'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5'}]
+)
 server = app.server
 
 df1 = pd.read_csv('max_muni_total_ONLY.csv')
@@ -150,7 +155,7 @@ fig1 = go.Figure(data = data1, layout = layout1) # 2D bubble Chart
 fig2 = go.Figure(data=data2, layout=layout2) # Pie Chart
 fig3 = go.Figure(data = data3, layout = layout3) # 3D Bubble Chart
 fig4 = go.Figure(data = data4,layout = layout4) # Line Graph
-fig5 = html.Iframe(srcDoc = open('MAXkepler.gl.html').read(), height='895', width='890') # Kepler Map
+fig5 = html.Iframe(srcDoc = open('MAXkepler.gl.html').read(), height='900', width='890') # Kepler Map
 
 # DASH LAYOUT
 
@@ -171,7 +176,7 @@ app.layout = html.Div(
                                               'margin-block-start': 1,
                                               'margin-block-end': 1, 
                                               'margin-inline-start': 25, # edits width left of margin
-                                              'margin-inline-end': 23}, # edits width right of margin
+                                              'margin-inline-end': 20}, # edits width right of margin
                                        className='text-center'),
                                        )),
     
@@ -213,7 +218,7 @@ app.layout = html.Div(
                                                          'padding-left':0,'padding-right':0, 
                                                          'padding-top': 5, 'padding-bottom':0,})
     
-                            ],)], style= {'background-color': '#09101d', 'padding-left':0,
+                            ],fluid=True)], style= {'background-color': '#09101d', 'padding-left':0,
                                           'padding-right':0, 'padding-top': 25, 'padding-bottom':20,})
 
 
